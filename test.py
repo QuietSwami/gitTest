@@ -1,17 +1,9 @@
-class MyClass:
-	att = 5555;
+import cherrypy
 
-	def hello (self):
-		print "Hello"
-	def changeAtt (self, numb):
-		self.att = numb
+class HelloWorld(object):
+	@cherrypy.expose
+	def index(self):
+		return "Hello World!"
 
-inte = MyClass()
-inte.hello()
-inte.changeAtt(55)
-print inte.att
-inte.att = 555
-print inte.att
-print "yolo"
-
-print "yolooo"
+if __name__ == "__main__":
+	cherrypy.quickstart(HelloWorld())
