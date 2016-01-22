@@ -1,9 +1,14 @@
 import cherrypy
+import string
+import random
 
-class HelloWorld(object):
+class StringGenerator(object):
 	@cherrypy.expose
 	def index(self):
-		return "Hello World!"
+		return "<h1>Hello World!</h1> <h2>Welcome</h2>"
+	
+	def generate(self):
+		return ''.join(random.sample(string.hexadigits, 8))
 
 if __name__ == "__main__":
-	cherrypy.quickstart(HelloWorld())
+	cherrypy.quickstart(StringGenerator())
