@@ -8,7 +8,7 @@ class StringGenerator(object):
 		return "<h1>Hello World!</h1> <h2>Welcome</h2>"
 	@cherrypy.expose
 	def generate(self):
-		return ''.join(random.sample(string.hexadigits, 8))
+		return ''.join(random.sample(string.hexdigits, 8))
 
 if __name__ == "__main__":
 	cherrypy.quickstart(StringGenerator())
