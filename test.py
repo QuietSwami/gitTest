@@ -1,14 +1,27 @@
 import cherrypy
 import string
 import random
+import os, os.path
 
 class StringGenerator(object):
 	@cherrypy.expose
 	def index(self):
-		return "<h1>Hello World!</h1> <h2>Welcome</h2>"
+		return open("unit_converter.html")
+
 	@cherrypy.expose
-	def generate(self, n):
-		return ''.join(random.sample(string.hexdigits, int(n)))
+	def generate(self):
+		return cherrypy.session["mystring"]
 
 if __name__ == "__main__":
-	cherrypy.quickstart(StringGenerator())
+	conf = {
+		'/': {
+			'tools.sessions.on': True,
+			'tools.staticdir.root': os.path.abspath(os.getcwd())		
+		},
+		'/static': {
+			'tools.staticdir.on':True,
+			'tools.static.dir':'./public'	
+		}	
+	}
+
+	cherrypy.quickstart(StringGenerator(), '/',conf)
